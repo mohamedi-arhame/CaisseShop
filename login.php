@@ -1,43 +1,40 @@
-<?php
-$page_title = "Connexion";
-require_once 'functions.php';
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-$error = '';
+<div class="logo-connect">
+    <img src="logo.png" alt="Logo">
+</div>
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = trim($_POST['identifiant'] ?? '');
-    $password = trim($_POST['mot_de_passe'] ?? '');
+<div class="page">
+    <div class="card">
 
-    if (login($pdo, $username, $password)) {
-        header('Location: caisse.php'); // tu pourras créer cette page après
-        exit;
-    } else {
-        $error = "Identifiant ou mot de passe incorrect.";
-    }
-}
+        <h1>Connexion</h1>
 
-require_once 'header.php';
-?>
+        <p class="desc">
+            Connectez-vous pour accéder à votre espace<br>
+            de gestion.
+        </p>
 
-<section class="login-card">
-    <h1>Connexion</h1>
-    <p class="subtitle">Connectez-vous pour accéder à votre espace de gestion.</p>
+        <form action="../CaisseShop/traitte-logine.php" method="POST">
+            <label>Identifiant</label>
+            <input type="text" name="email" placeholder="nom.utilisateur">
 
-    <?php if ($error): ?>
-        <div class="alert-error"><?= htmlspecialchars($error) ?></div>
-    <?php endif; ?>
+            <label>Mot de passe</label>
+            <input type="password" name="password" placeholder="••••••••">
 
-    <form method="post">
-        <label>Identifiant</label>
-        <input type="text" name="identifiant" placeholder="nom.utilisateur" required>
+            <button type="submit">
+                Se connecter <span>›</span>
+            </button>
+        </form>
 
-        <label>Mot de passe</label>
-        <input type="password" name="mot_de_passe" placeholder="mot de passe" required>
+    </div>
+</div>
 
-        <button type="submit" class="btn-green">Se connecter</button>
-    </form>
-</section>
-
-</main>
 </body>
 </html>

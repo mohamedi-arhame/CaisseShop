@@ -52,7 +52,7 @@ $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
 
-<?php require_once '/public/header.php'; ?>
+<?php require_once '../public/header.php'; ?>
 
 <div class="container">
 
