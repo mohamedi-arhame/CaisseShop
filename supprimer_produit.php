@@ -1,5 +1,10 @@
 <?php
+session_start();
 require_once 'db.php';
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
 
 $id = $_GET['id'];
 
@@ -33,11 +38,11 @@ if (isset($_POST['confirm'])) {
 
         <p>Tu es sûr de vouloir supprimer ce produit ?</p>
 
-        <form method="POST">
+        <form method="POST" action="supprimer_produit.php ? id=<?= $id ?>">
 
             <button type="submit" name="confirm" class="btn-red btn-small">
                 Oui supprimer
-            </button>
+            </button><br>
 
             <a href="produits.php" class="btn-blue btn-small">
                 Annuler

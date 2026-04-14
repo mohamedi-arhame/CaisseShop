@@ -16,7 +16,7 @@ require_once 'boutd_code.php';
 
     <div class="left" style="width:100%">
 
-        <!--  HEADER (recherche + bouton) -->
+        <!-- (recherche + bouton) -->
         <div class="produits-header">
 
             <!-- RECHERCHE -->
@@ -75,7 +75,8 @@ require_once 'boutd_code.php';
                                 <td style="display:flex; gap:5px;">
 
                                     <!-- MODIFIER -->
-                                    <a href="modifier_produit.php?id=<?= $p['id_produit'] ?>" 
+                                    <a
+                                     href="modifier_produit.php?id=<?= $p['id_produit'] ?>" 
                                        class="btn-small btn-blue">
                                         Modifier
                                     </a>

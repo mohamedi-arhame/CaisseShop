@@ -79,8 +79,8 @@ body {
 
 .produits-card {
     background: white;
-    padding: 20px;
-    border-radius: 10px;
+    padding: 10px;
+    border-radius: 8px;
 }
 
 .produits-title {
@@ -135,11 +135,11 @@ body {
     border-radius: 10px;
 }
 
-.card {
-    background: white;
+/*.card {
+    background: rgb(156, 43, 43);
     padding: 15px;
     border-radius: 10px;
-}
+}*/
 
 .name {
     font-weight: 600;
@@ -393,3 +393,43 @@ button {
 button span {
     font-size: 18px;
 }
+
+/* structure de la page ajoutait */
+
+.preview-box{
+    height:200px;
+    border:1px solid #e5e7eb;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#f9fafb;
+    margin-bottom:15px;
+}
+
+#previewZone img{
+    max-width:100%;
+}
+
+
+.btn-qte {
+    width: 2px;
+    height: 2px;
+    border: 1px solid #6c4cd3; 
+    background: rgb(71, 8, 245);
+    color: #e9e7ee;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+
+}
+
+ Alignement propre 
+.qte-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
