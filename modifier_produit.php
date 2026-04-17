@@ -7,6 +7,13 @@ if (!isset($_SESSION['user_id'])) {
 
 require_once 'db.php';
 
+/*  2. QUAND ON ARRIVE DEPUIS LE BOUTON MODIFIER  */
+if (isset($_GET['id'])) {
+    $stmt = $pdo->prepare("SELECT * FROM produits WHERE id_produit = :id");
+    $stmt->execute(['id' => $_GET['id']]);
+    $produit = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
 /* 1. SI ON CLIQUE SUR ENREGISTRER */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -23,19 +30,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'nom_produit' => $_POST['nom_produit'],
         'prix' => $_POST['prix'],
         'stock' => $_POST['stock'],
-        'id' => $_GET['id']
+        'id' => $_POST['id_produits']
     ]);
 
     header("Location: produits.php");
     exit;
 }
 
-/*  2. QUAND ON ARRIVE DEPUIS LE BOUTON MODIFIER  */
-if (isset($_GET['id'])) {
-    $stmt = $pdo->prepare("SELECT * FROM produits WHERE id_produit = :id");
-    $stmt->execute(['id' => $_GET['id']]);
-    $produit = $stmt->fetch(PDO::FETCH_ASSOC);
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -49,9 +51,9 @@ if (isset($_GET['id'])) {
 <body>
 <?php require_once 'header.php'; ?>
 
-<form method="post" action="modifier_produit.php" class="produits-title">
-<div class="produits-card">
 
+<div class="produits-card">
+ <form method="post" action="modifier_produit.php" class="produits-title">
   <div class="produits-title">Modifier un produit </div>
 
   <div class="container">
@@ -60,27 +62,29 @@ if (isset($_GET['id'])) {
       <table class="ticket-table">
         <tr>
           <td><label>Référence :</label></td>
-          <td><input id="reference"  value="<?= $produit['reference'] ?>"></td>
+          <td><input  name="reference" id="reference"  value="<?= $produit['reference'] ?>"></td>
         </tr>
         <tr>
           <td><label>Nom du produit :</label></td>
-          <td><input id="nomProduit" value="<?= $produit['nom_produit'] ?>"></td>
+          <td><input name="nom_produit" id="nomProduit" value="<?= $produit['nom_produit'] ?>"></td>
         </tr>
         <tr>
           <td><label>Prix (€) :</label></td>
-          <td><input id="prix" value="<?= $produit['prix'] ?>"></td>
+          <td><input  name="prix" id="prix" value="<?= $produit['prix'] ?>" step="0.01"></td>
         </tr>
         <tr>
           <td><label>Stock :</label></td>
-          <td><input id="stock"  value="<?= $produit['stock'] ?>"></td>
+          <td><input  name="stock" id="stock"  value="<?= $produit['stock'] ?>"></td>
         </tr>
         <tr>
+  
           <td><label>Imprimante DYMO :</label></td>
           <td>
             <select id="printerSelect"></select>
           </td>
         </tr>
       </table>
+         <input type="hidden" name="id_produits" value="<?= $produit['id_produit'] ?>">
 
       <div class="actions">
         <button class="btn-cancel">Annuler</button>
@@ -88,7 +92,7 @@ if (isset($_GET['id'])) {
       </div>
     </div>
     </form>
-
+ 
     <div class="right">
       <h2>Aperçu DYMO</h2>
       <div class="preview-box">
