@@ -11,13 +11,9 @@ if (!isset($_SESSION['user_id'])) {
     <meta charset="UTF-8">
     <title>Ajoute un produit</title>
 
-    <!-- TON CSS GLOBAL -->
+  
     <link rel="stylesheet" href="style.css">
-
-    <!-- CSS de cette page uniquement -->
     <link rel="stylesheet" href="ajout-produit.css">
-
-    <!-- DYMO -->
     <script src="https://cdn.jsdelivr.net/gh/dymosoftware/dymo-connect-framework/dymo.connect.framework.js"></script>
 </head>
 <body>
@@ -72,7 +68,6 @@ if (!isset($_SESSION['user_id'])) {
   </div>
 
 </div>
-
 </body>
 <script src="ajouter-produit.JS"></script>
 </html>
