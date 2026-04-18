@@ -101,13 +101,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <button class="btn-validate" id="printBtn">Imprimer l’étiquette</button>
     </div>
-
   </div>
-
 </div>
-
-
-
 </body>
 <script src="modifier.js"></script>
 </html>
