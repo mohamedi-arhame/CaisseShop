@@ -85,7 +85,10 @@ $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <div class="actions">
             <button class="btn-cancel">Annuler / Vider</button>
-            <button class="btn-validate">Valider la vente</button>
+        
+            <form method="POST" action="valider_vente.php">
+              <button class="btn-validate">Valider</button>
+             </form>
         </div>
     </div>
 </div>
@@ -189,28 +192,28 @@ function afficherPanier() {
     total.textContent = somme.toFixed(2).replace('.', ',') + ' €';
 }
 
-document.querySelector('.btn-validate').addEventListener('click', function() {
+document.querySelector('.btn-validate').addEventListener('click', function(e) {
+    e.preventDefault();
 
     if (panier.length === 0) {
         alert("Panier vide !");
         return;
     }
 
-    const form = new FormData();
-    form.append("panier", JSON.stringify(panier));
-
     fetch("valider_vente.php", {
         method: "POST",
-        body: form
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(panier)
     })
     .then(r => r.text())
     .then(rep => {
-        if (rep === "OK") {
-            alert("Vente enregistrée !");
-            panier = [];
-            afficherPanier();
+        if (rep.startsWith("OK")) {
+            const idVente = rep.split("|")[1];
+            window.location.href = "vente_detail.php?id=" + idVente;
         } else {
-            alert("Erreur : " + rep);
+            alert(rep);
         }
     });
 });
